@@ -40,7 +40,7 @@ static void detect_arrows(snake_t *snake, body_t *list)
     }
 }
 
-//Detect if an apple is eat by the snake. If true, create a new member in the snake body.
+//Detect if an apple is eat by the snake. If true, create a new member in the snake tail.
 void apple_eat(snake_t *snake)
 {
     body_t *new = NULL;
@@ -57,25 +57,25 @@ void apple_eat(snake_t *snake)
         for (; snake->body && snake->body->next; snake->body = snake->body->next);
         switch (snake->last_move) {
             case UP :
-                new->pos[POS_Y] = snake->body->pos[POS_Y] - 1;
-                if (new->pos[POS_Y] > snake->screen[HEIGHT])
-                    new->pos[POS_Y] = 0;
-                new->pos[POS_X] = snake->body->pos[POS_X];
-            case DOWN :
-                new->pos[POS_Y] = snake->body->pos[POS_Y] + 1;
-                if (new->pos[POS_Y] < 0)
-                    new->pos[POS_Y] = snake->screen[HEIGHT];
-                new->pos[POS_X] = snake->body->pos[POS_X];
-            case RIGHT :
                 new->pos[POS_X] = snake->body->pos[POS_X] - 1;
-                if (new->pos[POS_X] < 0)
-                    new->pos[POS_X] = snake->screen[WIDTH];
-                new->pos[POS_Y] = snake->body->pos[POS_Y];
-            case LEFT :
-                new->pos[POS_X] = snake->body->pos[POS_X] + 1;
                 if (new->pos[POS_X] > snake->screen[WIDTH])
                     new->pos[POS_X] = 0;
                 new->pos[POS_Y] = snake->body->pos[POS_Y];
+            case DOWN :
+                new->pos[POS_X] = snake->body->pos[POS_X] + 1;
+                if (new->pos[POS_X] < 0)
+                    new->pos[POS_X] = snake->screen[WIDTH];
+                new->pos[POS_Y] = snake->body->pos[POS_Y];
+            case RIGHT :
+                new->pos[POS_Y] = snake->body->pos[POS_Y] - 1;
+                if (new->pos[POS_Y] < 0)
+                    new->pos[POS_Y] = snake->screen[HEIGHT];
+                new->pos[POS_X] = snake->body->pos[POS_X];
+            case LEFT :
+                new->pos[POS_Y] = snake->body->pos[POS_Y] + 1;
+                if (new->pos[POS_Y] > snake->screen[HEIGHT])
+                    new->pos[POS_Y] = 0;
+                new->pos[POS_X] = snake->body->pos[POS_X];
         }
         new->prev = snake->body;
         if (snake->body)
@@ -85,18 +85,13 @@ void apple_eat(snake_t *snake)
     }
 }
 
+//Detect if the snake head enter in collision with the body.
 int detect_snake_tail(snake_t *snake)
 {
     if (!snake->body->next)
         return false;
     for (body_t *body = snake->body->next; body; body = body->next) {
-        if (snake->body->pos[POS_X] + 1 == body->pos[POS_X] && snake->body->pos[POS_Y] == body->pos[POS_Y] && snake->last_move == RIGHT)
-            return true;
-        if (snake->body->pos[POS_X] - 1 == body->pos[POS_X] && snake->body->pos[POS_Y] == body->pos[POS_Y] && snake->last_move == LEFT)
-            return true;
-        if (snake->body->pos[POS_X] == body->pos[POS_X] && snake->body->pos[POS_Y] - 1 == body->pos[POS_Y] && snake->last_move == UP)
-            return true;
-        if (snake->body->pos[POS_X] == body->pos[POS_X] && snake->body->pos[POS_Y] + 1 == body->pos[POS_Y] && snake->last_move == DOWN)
+        if (snake->body->pos[POS_X] == body->pos[POS_X] && snake->body->pos[POS_Y] == body->pos[POS_Y])
             return true;
     }
     return false;
