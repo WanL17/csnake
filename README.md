@@ -23,6 +23,10 @@
 - You can increase the size of the snake by eating apples.
 - **Be careful**, don't bite your own tail, or you'll lose.
 
+### Dependencies
+- C
+- Ncurses library
+
 ### How to play the game ?
 - First of all you need to compile the source files with one of these commands :
 
