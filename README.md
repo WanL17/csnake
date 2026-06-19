@@ -14,7 +14,7 @@
 
 <div align=center>
 
-![Showcase](./assets/showcase_csnake.mp4)
+![Showcase](./assets/csnake.png)
 
 <div align=left>
 
