@@ -1,5 +1,6 @@
 #include "snake.h"
 
+//Function to free and deallocate everything from the game.
 void free_snake(snake_t *snake)
 {
     if (!snake)
