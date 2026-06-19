@@ -14,9 +14,7 @@
 
 <div align=center>
 
-<video width="320" height="240" controls>
- <source src="./assets/showcase_csnake.mp4" type="video/mp4">
-</video>
+[](./assets/showcase_csnake.mp4)
 
 <div align=left>
 
