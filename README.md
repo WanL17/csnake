@@ -2,8 +2,9 @@
 
 ### What is it ?
 - This project is fully made in c and made for terminals thanks to the ncurses library.
-- Made by me.
-- A classic recreation of the original game.
+- A classic recreation of the original game;
+
+![image](./assets/csnake.png)
 
 ### How to play the game ?
 - First of all you need to compile the source files with one of these commands :
