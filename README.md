@@ -4,7 +4,7 @@
 - This project is fully made in c and made for terminals thanks to the ncurses library.
 - A classic recreation of the original game;
 
-<video width="1920" height="1080" controls>
+<video width="320" height="240" controls>
  <source src="./assets/showcase_csnake.mp4" type="video/mp4">
 </video>
 
