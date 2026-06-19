@@ -24,7 +24,7 @@
 - **Be careful**, don't bite your own tail, or you'll lose.
 
 ### Dependencies
-- C
+- clang
 - Ncurses library
 
 ### How to play the game ?
