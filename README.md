@@ -18,6 +18,11 @@
 
 <div align=left>
 
+### Features
+- Move the snake woth the arrows up, down, left and right.
+- You can increase the size of the snake by eating apples.
+- **Be careful**, don't bite your own tail, or you'll lose.
+
 ### How to play the game ?
 - First of all you need to compile the source files with one of these commands :
 
