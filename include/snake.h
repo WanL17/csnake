@@ -16,6 +16,11 @@
     #define POS_Y 1
     #define WIDTH 0
     #define HEIGHT 1
+    #define BLUE "\033[34m"
+    #define GREEN "\033[32m"
+    #define RED "\033[31m"
+    #define ORANGE "\033[33m"
+    #define WHITE "\033[37m"
 
 typedef enum move_s {
     UP,
@@ -27,6 +32,7 @@ typedef enum move_s {
 typedef struct body_s {
     char c;
     int pos[2];
+    int prev_pos[2];
     struct body_s *prev;
     struct body_s *next;
 } body_t;
@@ -35,6 +41,7 @@ typedef struct snake_s {
     move_t last_move;
     int score;
     int screen[2];
+    int delay;
     body_t *body;
     body_t *apple;
     struct timeval start;
@@ -45,7 +52,7 @@ void get_terminal_size(snake_t *snake);
 void exit_window(void);
 void free_snake(snake_t *snake);
 body_t *create_body(char c, int apple, snake_t *snake);
-void move_snake(body_t *elem, move_t last_move, int screen_width, int screen_height);
+void move_snake(body_t *elem, snake_t *snake);
 void game_loop(snake_t *snake);
 int main(int argc, char **argv);
 

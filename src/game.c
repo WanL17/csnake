@@ -5,38 +5,35 @@ static void detect_arrows(snake_t *snake, body_t *list)
 {
     getch();
     char arrow = getch();
-    for (int i = 0; list; list = list->next) {
+    for (; list; list = list->next) {
         switch (arrow) {
             case 'A' :
                 snake->last_move = UP;
-                move_snake(list, snake->last_move, snake->screen[WIDTH], snake->screen[HEIGHT]);
-                if (i == 0)
+                move_snake(list, snake);
+                if (!list->prev)
                     list->c = '^';
                 break;
             case 'B' :
                 snake->last_move = DOWN;
-                move_snake(list, snake->last_move, snake->screen[WIDTH], snake->screen[HEIGHT]);
-                if (i == 0) {
-                    printf("%i\n", i);
+                move_snake(list, snake);
+                if (!list->prev)
                     list->c = 'v';
-                }
                 break;
             case 'C' :
                 snake->last_move = RIGHT;
-                move_snake(list, snake->last_move, snake->screen[WIDTH], snake->screen[HEIGHT]);
-                if (i == 0)
+                move_snake(list, snake);
+                if (!list->prev)
                     list->c = '>';
                 break;
             case 'D' :
                 snake->last_move = LEFT;
-                move_snake(list, snake->last_move, snake->screen[WIDTH], snake->screen[HEIGHT]);
-                if (i == 0)
+                move_snake(list, snake);
+                if (!list->prev)
                     list->c = '<';
                 break;
             default :
                 break;
         }
-        i++;
     }
 }
 
@@ -61,16 +58,19 @@ void apple_eat(snake_t *snake)
                 if (new->pos[POS_X] > snake->screen[WIDTH])
                     new->pos[POS_X] = 0;
                 new->pos[POS_Y] = snake->body->pos[POS_Y];
+                break;
             case DOWN :
                 new->pos[POS_X] = snake->body->pos[POS_X] + 1;
                 if (new->pos[POS_X] < 0)
                     new->pos[POS_X] = snake->screen[WIDTH];
                 new->pos[POS_Y] = snake->body->pos[POS_Y];
+                break;
             case RIGHT :
                 new->pos[POS_Y] = snake->body->pos[POS_Y] - 1;
                 if (new->pos[POS_Y] < 0)
                     new->pos[POS_Y] = snake->screen[HEIGHT];
                 new->pos[POS_X] = snake->body->pos[POS_X];
+                break;
             case LEFT :
                 new->pos[POS_Y] = snake->body->pos[POS_Y] + 1;
                 if (new->pos[POS_Y] > snake->screen[HEIGHT])
@@ -101,17 +101,24 @@ int detect_snake_tail(snake_t *snake)
 void game_loop(snake_t *snake)
 {
     initscr();
+    start_color();
     curs_set(0);
     noecho();
-    timeout(200);
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    timeout(100);
     while (1) {
         get_terminal_size(snake);
         gettimeofday(&snake->start, NULL);
         clear();
+        attron(COLOR_PAIR(1));
         mvprintw(snake->apple->pos[POS_Y], snake->apple->pos[POS_X], "%c", snake->apple->c);
+        attroff(COLOR_PAIR(1));
         for (body_t *list = snake->body; list; list = list->next) {
-            move_snake(list, snake->last_move, snake->screen[WIDTH], snake->screen[HEIGHT]);
+            move_snake(list, snake);
+            attron(COLOR_PAIR(2));
             mvprintw(list->pos[POS_Y], list->pos[POS_X], "%c", list->c);
+            attroff(COLOR_PAIR(2));
         }
         apple_eat(snake);
         switch (getch()) {
@@ -120,11 +127,12 @@ void game_loop(snake_t *snake)
                 return;
             case '\033' :
                 detect_arrows(snake, snake->body);
+                apple_eat(snake);
                 break;
         }
         if (detect_snake_tail(snake) == true) {
             exit_window();
-            printf("Be careful, don't bite your own tail %i!\n", snake->last_move);
+            printf(RED"GAME OVER\n"WHITE"Be careful, don't bite your own tail !\n");
             return;
         }
         refresh();

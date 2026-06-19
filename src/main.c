@@ -34,12 +34,13 @@ int main(int argc, char **argv)
     snake_t *snake = calloc(1, sizeof(snake_t));
     if (!snake)
         return 84;
+    snake->delay = 1000;
     snake->last_move = DOWN;
     get_terminal_size(snake);
     snake->body = create_body('v', false, snake);
     snake->apple = create_body('@', true, snake);
     game_loop(snake);
-    printf("Your score: %i.\n", snake->score);
+    printf("Your score: "BLUE"%i.\n"WHITE, snake->score);
     free_snake(snake);
     return 0;
 }
