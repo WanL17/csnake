@@ -30,7 +30,8 @@
 make
 ```
 <div align=center>
-   or
+
+   **or**
 <div align=left>
 
 ```
