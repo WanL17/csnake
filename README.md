@@ -2,9 +2,9 @@
 
 <div align=center>
 
-![GitHub last commit](https://img.shields.io/github/last-commit/csnake/shell?style=for-the-badge&labelColor=101418&color=9ccbfb)
-![GitHub Repo stars](https://img.shields.io/github/stars/csnake/shell?style=for-the-badge&labelColor=101418&color=b9c8da)
-![GitHub repo size](https://img.shields.io/github/repo-size/csnake/shell?style=for-the-badge&labelColor=101418&color=d3bfe6)
+![GitHub last commit](https://img.shields.io/github/last-commit/WanL17/csnake?style=for-the-badge&labelColor=101418&color=9ccbfb)
+![GitHub last commit](https://img.shields.io/github/stars/WanL17/csnake?style=for-the-badge&labelColor=101418&color=9ccbfb)
+![GitHub last commit](https://img.shields.io/github/repo-size/WanL17/csnake?style=for-the-badge&labelColor=101418&color=9ccbfb)
 
 <div align=left>
 
