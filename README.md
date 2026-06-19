@@ -29,7 +29,9 @@
 ```
 make
 ```
+<div align=center>
    or
+<div align=left>
 
 ```
 make re
