@@ -19,13 +19,18 @@
 <div align=left>
 
 ### Features
-- Move the snake woth the arrows up, down, left and right.
+- Move the snake with the arrows up, down, left and right.
 - You can increase the size of the snake by eating apples.
 - **Be careful**, don't bite your own tail, or you'll lose.
 
 ### Dependencies
 - clang
 - Ncurses library
+- If you wanna download the dependencies required you can just execute the bash script named ```install_dependencies.sh``` :
+```
+chmod 777 install_dependencies.sh
+./install_dependencies.sh
+```
 
 ### How to play the game ?
 - First of all you need to compile the source files with one of these commands :
