@@ -10,7 +10,8 @@ SRC    	= src/main.c \
 		  src/game.c \
 		  src/exit.c \
 		  src/move_snake.c \
-		  src/delete.c
+		  src/delete.c \
+		  src/apple.c
 
 OBJ     = $(SRC:.c=.o)
 

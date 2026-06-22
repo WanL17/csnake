@@ -40,16 +40,16 @@ body_t *create_body(char c, int apple, snake_t *snake)
 int main(int argc, char **argv)
 {
     if (argc > 1) {
+        int ret = 0;
         if (argc == 2 && strcmp("-h", argv[1]) == 0) {
             display_helper();
-            return 0;
         } else if (argc == 2 && strcmp("-v", argv[1]) == 0) {
             display_version();
-            return 0;
         } else {
-            printf("csnake: too much arguments.\n");
-            return 1;
+            printf("csnake: not good arguments.\n");
+            ret = 1;
         }
+        return ret;
     }
     snake_t *snake = calloc(1, sizeof(snake_t));
     if (!snake)
