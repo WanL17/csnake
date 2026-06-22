@@ -29,7 +29,7 @@
 - If you wanna download the dependencies required you can just execute the bash script named ```install_dependencies.sh``` :
 ```
 chmod 777 install_dependencies.sh
-./install_dependencies.sh
+sudo ./install_dependencies.sh
 ```
 
 ### How to play the game ?
