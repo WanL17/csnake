@@ -53,7 +53,6 @@ int detect_snake_tail(snake_t *snake)
 void game_loop(snake_t *snake)
 {
     int time = 0;
-    int nb_apple = 0;
     initscr();
     start_color();
     curs_set(0);
@@ -61,6 +60,7 @@ void game_loop(snake_t *snake)
     init_pair(1, COLOR_RED, COLOR_BLACK);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     timeout(100);
+    main_menu(snake);
     while (1) {
         get_terminal_size(snake);
         gettimeofday(&snake->start, NULL);
@@ -84,14 +84,15 @@ void game_loop(snake_t *snake)
             case 'q' :
                 exit_window();
                 return;
+            case 'e' :
+                pause_menu(snake);
             case '\033' :
                 detect_arrows(snake, snake->body);
                 apple_eat(snake);
                 break;
         }
         if (detect_snake_tail(snake) == true) {
-            exit_window();
-            printf(RED"GAME OVER\n"WHITE"Be careful, don't bite your own tail !\n");
+            game_over_screen(snake);
             return;
         }
         time++;
@@ -99,4 +100,18 @@ void game_loop(snake_t *snake)
         gettimeofday(&snake->start, NULL);
     }
     exit_window();
+}
+
+void new_game(snake_t *snake)
+{
+    free_snake(snake);
+    snake = calloc(1, sizeof(snake_t));
+    if (!snake)
+        exit(84);
+    snake->delay = 1000;
+    snake->last_move = DOWN;
+    get_terminal_size(snake);
+    snake->body = create_body('v', false, snake);
+    snake->apple = create_body('@', true, snake);
+    game_loop(snake);
 }

@@ -54,8 +54,12 @@ void free_snake(snake_t *snake);
 body_t *create_body(char c, int apple, snake_t *snake);
 void create_apple(snake_t *snake);
 void move_snake(body_t *elem, snake_t *snake);
+void main_menu(snake_t *snake);
 void apple_eat(snake_t *snake);
+void pause_menu(snake_t *snake);
 void game_loop(snake_t *snake);
+void game_over_screen(snake_t *snake);
+void new_game(snake_t *snake);
 int main(int argc, char **argv);
 
 #endif
